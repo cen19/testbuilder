@@ -1,0 +1,19 @@
+{
+  "name": "hrsf77-testbuilder",
+  "version": "1.0.0",
+  "description": "",
+  "main": "detectNetwork.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cen19/hrsf77-testbuilder.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cen19/hrsf77-testbuilder/issues"
+  },
+  "homepage": "https://github.com/cen19/hrsf77-testbuilder#readme"
+}
