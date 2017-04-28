@@ -30,9 +30,20 @@ var detectNetwork = function (creditCardNumbers) {
   }
 
   let visaLengthCheck = creditCardNumbers.length === 13 || creditCardNumbers.length === 16 || creditCardNumbers.length === 19;
-  let visaPrefixCheck = creditCardNumbers[0] === '4';
-  if (visaPrefixCheck && visaPrefixCheck) {
-    return 'Visa';
+  let visaPrefixCheck = creditCardNumbers.slice(0, 1) === '4';
+  let switchPrefixExtendedCheck = creditCardNumbers.slice(0, 4) === '4903' || creditCardNumbers.slice(0, 4) === '4905' || creditCardNumbers.slice(0, 4) === '4911' || creditCardNumbers.slice(0, 4) === '4936';
+
+  let switchLengthCheck = creditCardNumbers.length === 16 || creditCardNumbers.length === 18 || creditCardNumbers.length === 19;
+  let switchPrefixCheck = creditCardNumbers.slice(0, 6) === '564182' || creditCardNumbers.slice(0, 6) === '633110' || creditCardNumbers.slice(0, 4) === '6333' || creditCardNumbers.slice(0, 4) === '6759';
+  if (switchPrefixCheck && switchLengthCheck) {
+    return 'Switch';
+  }
+  if (switchPrefixExtendedCheck && (creditCardNumbers.length === 16 || creditCardNumbers.length === 19)) {
+    return 'Switch';
+  } else if (visaLengthCheck && visaPrefixCheck) {
+    return 'Visa'
+  } else if (switchPrefixExtendedCheck && creditCardNumbers.length === 18) {
+    return 'Switch';
   }
 
   let mastercardLengthCheck = creditCardNumbers.length === 16;
@@ -53,6 +64,12 @@ var detectNetwork = function (creditCardNumbers) {
     return 'Discover';
   }
 
+  let chinaUnionPayPrefixCheck = (creditCardNumbers.slice(0, 6) >= '622126' && creditCardNumbers.slice(0, 6) <= '622925') || (creditCardNumbers.slice(0, 3) >= '624' && creditCardNumbers.slice(0, 3) <= '626') || (creditCardNumbers.slice(0, 4) >= '6282' && creditCardNumbers.slice(0, 4) <= '6288');
+  let chinaUnionPayLengthCheck = creditCardNumbers.length >= 16 && creditCardNumbers.length <= 19;
+  if (chinaUnionPayLengthCheck && chinaUnionPayPrefixCheck) {
+    return 'China UnionPay';
+  }
 }
+ console.log(detectNetwork('4903' + Math.pow(10, 13).toString()));
 
 
